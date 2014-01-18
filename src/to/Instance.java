@@ -1,5 +1,6 @@
 package to;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Instance {
@@ -18,5 +19,9 @@ public class Instance {
 
 	public List<Package> getPackages() {
 		return packages;
+	}
+	
+	public void shufflePackages() {
+		Collections.shuffle(packages);
 	}
 }
