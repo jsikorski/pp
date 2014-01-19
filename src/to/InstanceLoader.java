@@ -32,7 +32,8 @@ public class InstanceLoader {
 					parts[0], 
 					Float.parseFloat(parts[1]), 
 					Float.parseFloat(parts[2]), 
-					Float.parseFloat(parts[3])
+					Float.parseFloat(parts[3]),
+					Float.parseFloat(parts[4])
 				)
 			);
 		}

@@ -8,6 +8,9 @@ public class Pp {
 		InstanceLoader instanceLoader = new InstanceLoader("data/pp101.in");
 		Instance instance = instanceLoader.load();
 		instance.shufflePackages();
+		
+		InstanceResolver resolver = new InstanceResolver(instance);
+		Solution solution = resolver.findSolution();
 	}
 
 }
