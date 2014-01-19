@@ -40,9 +40,10 @@ public class Solution {
 		
 		// To get packages in correct order
 		List<Tuple<String, String>> packagesMap = getPackagesMap();
-		builder.append(packagesMap.size() + newLine);
+		builder.append(packagesMap.size());
 		for (Tuple<String, String> tuple: packagesMap) {
-			builder.append(tuple.getFirst() + "\t" + tuple.getSecond() + newLine);
+			builder.append(newLine);
+			builder.append(tuple.getFirst() + "\t" + tuple.getSecond());
 		}
 		
 		return builder.toString();
