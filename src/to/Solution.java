@@ -57,7 +57,7 @@ public class Solution {
 		return sum;
 	}
 
-	private float getPalletsSmallestVolume() {
+	public float getPalletsSmallestVolume() {
 		Pallet result = null;
 		for (Pallet pallet : pallets) {
 			if (result == null || pallet.getVolume() < result.getVolume()) {
