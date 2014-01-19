@@ -5,7 +5,7 @@ public class Pp {
 	public static void main(String[] args) throws Exception {
 		long start = System.currentTimeMillis();
 				
-		InstanceLoader instanceLoader = new InstanceLoader("data/pp101.in");
+		InstanceLoader instanceLoader = new InstanceLoader("data/pp106.in");
 		Instance instance = instanceLoader.load();
 		instance.shufflePackages();
 		

@@ -17,12 +17,6 @@ public class Pallet {
 		this.packages = new ArrayList<>();
 		this.palletType = palletType;
 	}
-	
-	private Pallet(List<Package> packages) {
-		this.id = "";
-		this.packages = packages;
-		this.palletType = getPalletTypeWithLargestVolume();
-	}
 
 	public void addPackage(Package package0) {
 		packages.add(package0);
@@ -58,6 +52,12 @@ public class Pallet {
 		List<Package> newPackages = new ArrayList<>(packages);
 		newPackages.add(package0);
 		return new Pallet(newPackages).isValid();
+	}
+	
+	private Pallet(List<Package> packages) {
+		this.id = "";
+		this.packages = packages;
+		this.palletType = getPalletTypeWithLargestVolume();
 	}
 	
 	private boolean isValid() {
