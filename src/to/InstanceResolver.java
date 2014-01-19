@@ -6,7 +6,6 @@ public class InstanceResolver {
 	
 	public InstanceResolver(Instance instance) {
 		this.instance = instance;
-		lastPalletId = -1;
 	}
 	
 	public Solution findSolution() {
@@ -15,7 +14,7 @@ public class InstanceResolver {
 		for (Package package0 : instance.getPackages()) {
 			Pallet pallet = solution.getPalletFor(package0);
 			if (pallet == null) {
-				pallet = new Pallet(generatePalletId(), instance.getPalletTypeById(package0.getPrefferedPalletId()));
+				pallet = new Pallet(generatePalletId(), package0.getPrefferedPalletType());
 				solution.addPallet(pallet);
 			}
 			

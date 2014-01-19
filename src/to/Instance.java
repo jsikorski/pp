@@ -24,13 +24,4 @@ public class Instance {
 	public void shufflePackages() {
 		Collections.shuffle(packages);
 	}
-	
-	public PalletType getPalletTypeById(String palletId) {
-		for (PalletType palletType : palletTypes) {
-			if (palletType.getId().equals(palletId)) {
-				return palletType;
-			}
-		}
-		return null;
-	}
 }

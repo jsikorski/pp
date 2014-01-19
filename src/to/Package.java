@@ -4,13 +4,13 @@ public class Package {
 	private String id;
 	private float volume;
 	private float weight;
-	private String prefferedPalletId;
+	private PalletType prefferedPalletType;
 	
-	public Package(String id, float volume, float weight, String prefferedPalletId) {
+	public Package(String id, float volume, float weight, PalletType prefferedPalletType) {
 		this.id = id;
 		this.volume = volume;
 		this.weight = weight;
-		this.prefferedPalletId = prefferedPalletId;
+		this.prefferedPalletType = prefferedPalletType;
 	}
 	
 	public String getId() {
@@ -25,7 +25,7 @@ public class Package {
 		return weight;
 	}
 	
-	public String getPrefferedPalletId() {
-		return prefferedPalletId;
+	public PalletType getPrefferedPalletType() {
+		return prefferedPalletType;
 	}
 }

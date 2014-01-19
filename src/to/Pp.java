@@ -1,16 +1,16 @@
 package to;
 
-import java.io.IOException;
-
 public class Pp {
 
-	public static void main(String[] args) throws IOException {
-		InstanceLoader instanceLoader = new InstanceLoader("data/pp101.in");
+	public static void main(String[] args) throws Exception {
+		InstanceLoader instanceLoader = new InstanceLoader("data/pp103.in");
 		Instance instance = instanceLoader.load();
-		instance.shufflePackages();
+		//instance.shufflePackages();
 		
 		InstanceResolver resolver = new InstanceResolver(instance);
 		Solution solution = resolver.findSolution();
+		
+		System.out.println(solution);
 	}
 
 }

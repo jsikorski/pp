@@ -13,10 +13,10 @@ public class InstanceLoader {
 		this.filePath = filePath;
 	}
 	
-	public Instance load() throws IOException {
+	public Instance load() throws Exception {
 		BufferedReader reader = new BufferedReader(new FileReader(filePath));
 		List<PalletType> palletTypes = readPalletsSection(reader);
-		List<Package> packages = readPackagesSection(reader);
+		List<Package> packages = readPackagesSection(reader, palletTypes);
 		return new Instance(palletTypes, packages);
 	}
 	
@@ -41,7 +41,7 @@ public class InstanceLoader {
 		return palletTypes;
 	}
 	
-	private List<Package> readPackagesSection(BufferedReader reader) throws IOException {
+	private List<Package> readPackagesSection(BufferedReader reader, List<PalletType> palletTypes) throws Exception {
 		int numberOfLines = Integer.parseInt(reader.readLine());
 		List<Package> packages = new ArrayList<>(numberOfLines);
 		
@@ -52,12 +52,22 @@ public class InstanceLoader {
 				new Package(
 					parts[0], 
 					Float.parseFloat(parts[1]), 
-					Float.parseFloat(parts[2]), 
-					parts[3]
+					Float.parseFloat(parts[2]),
+					getPalletTypeById(palletTypes, parts[3])
 				)
 			);
 		}
 		
 		return packages;
+	}
+	
+	public PalletType getPalletTypeById(List<PalletType> palletTypes, String palletTypeId) throws Exception {
+		for (PalletType palletType : palletTypes) {
+			if (palletType.getId().equals(palletTypeId)) {
+				return palletType;
+			}
+		}
+		
+		throw new Exception("Cannot find pallet type with id " + palletTypeId);
 	}
 }
