@@ -87,7 +87,7 @@ public class Pallet {
 	}
 	
 	public float getVolume() {
-		return getNumberOfRaiserModules() * palletType.getRaiserModuleHeight();
+		return getFootprint() * getNumberOfRaiserModules() * palletType.getRaiserModuleHeight();
 	}
 
 	public List<Package> getPackages() {
