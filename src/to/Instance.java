@@ -1,6 +1,7 @@
 package to;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Instance {
@@ -23,5 +24,9 @@ public class Instance {
 	
 	public void shufflePackages() {
 		Collections.shuffle(packages);
+	}
+	
+	public void sortPackages(Comparator<Package> comparator) {
+		Collections.sort(packages, comparator);
 	}
 }

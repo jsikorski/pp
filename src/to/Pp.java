@@ -25,7 +25,7 @@ public class Pp {
 						: "data/pp1" + (i + 1) + ".in";
 				InstanceLoader instanceLoader = new InstanceLoader(path);
 				Instance instance = instanceLoader.load();
-				instance.shufflePackages();
+				instance.sortPackages(new PackagesByWeightsDesc());
 
 				InstanceResolver resolver = new InstanceResolver(instance);
 				Solution solution = resolver.findSolution();
@@ -44,8 +44,8 @@ public class Pp {
 			}
 		}
 
-		avgPalletsFootprintsSum /= NUMBER_OF_RUNS;
-		getPalletsSmallestVolume /= NUMBER_OF_RUNS;
+		avgPalletsFootprintsSum /= NUMBER_OF_RUNS * 10;
+		getPalletsSmallestVolume /= NUMBER_OF_RUNS * 10;
 		System.out.println("Average solution: " + avgPalletsFootprintsSum + " "
 				+ getPalletsSmallestVolume);
 		// Collections.sort(footprints);
