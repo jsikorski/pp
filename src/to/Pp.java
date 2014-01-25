@@ -43,8 +43,12 @@ public class Pp {
 					throw new Exception("Duration time longer then 1 second");
 				}
 				
-				if (solution.getTotalNumberOfPackages() != instance.getPackages().size()) {
-					throw new Exception("Invalid solution");
+				if (instance.getPackages().size() != solution.getTotalNumberOfPackages()) {
+					throw new Exception(
+						"Invalid solution." + System.lineSeparator() +
+						"Number of packages in instance: " + instance.getPackages().size() + System.lineSeparator() + 
+						"Number of packages in solution: " + solution.getTotalNumberOfPackages()
+					);
 				}
 			}
 		}
