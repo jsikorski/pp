@@ -5,11 +5,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Solution {	
+public class Solution implements Comparable<Solution> {	
 	private List<Pallet> pallets;
 	
 	public Solution() {
 		pallets = new ArrayList<>();
+	}
+	
+	public Solution(List<Pallet> pallets) {
+		this.pallets = pallets;
 	}
 	
 	public Pallet getPalletFor(Package package0) {
@@ -83,5 +87,48 @@ public class Solution {
 			}
 		});
 		return packagesMap;
+	}
+
+	@Override
+	public int compareTo(Solution otherSolution) {
+		float footprintsSum = getPalletsFootprintsSum();
+		float otherFootprintsSum = otherSolution.getPalletsFootprintsSum();
+		
+		if (footprintsSum < otherFootprintsSum) {
+			return 1;
+		} else if (footprintsSum > otherFootprintsSum) {
+			return -1;
+		}
+		
+		float smallestVolume = getPalletsSmallestVolume();
+		float otherSmallestVolume = otherSolution.getPalletsSmallestVolume();
+		
+		if (smallestVolume < otherSmallestVolume) {
+			return 1;
+		} else if (smallestVolume > otherSmallestVolume) {
+			return -1;
+		}
+		
+		return 0;
+	}
+	
+	public boolean isBetterThan(Solution solution) {
+		return compareTo(solution) == 1;
+	}
+
+	public List<Pallet> clonePallets() {
+		List<Pallet> copy = new ArrayList<>(pallets.size());
+		for (Pallet pallet : pallets) {
+			copy.add(new Pallet(pallet));
+		}
+		return copy;
+	}
+
+	public int getTotalNumberOfPackages() {
+		int sum = 0;
+		for (Pallet pallet : pallets) {
+			sum += pallet.getNumberOfPackages();
+		}
+		return sum;
 	}
 }

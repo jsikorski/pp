@@ -29,17 +29,22 @@ public class Pp {
 
 				InstanceResolver resolver = new InstanceResolver(instance);
 				Solution solution = resolver.findSolution();
+				
+				SolutionOptimizer solutionOptimizer = new LocalSearchSolutionOptimizer(solution, 750);
+				solution = solutionOptimizer.optimize();
 
 				avgPalletsFootprintsSum += solution.getPalletsFootprintsSum();
 				getPalletsSmallestVolume += solution.getPalletsSmallestVolume();
 				footprints.get(i).add(solution.getPalletsFootprintsSum());
 				smallestVolumes.get(i).add(solution.getPalletsSmallestVolume());
-				System.out.println(solution);
-				System.out.println();
 
 				long duration = System.currentTimeMillis() - start;
 				if (duration > 1000) {
 					throw new Exception("Duration time longer then 1 second");
+				}
+				
+				if (solution.getTotalNumberOfPackages() != instance.getPackages().size()) {
+					throw new Exception("Invalid solution");
 				}
 			}
 		}

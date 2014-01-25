@@ -39,4 +39,8 @@ public class PalletType {
 	public int getMaxNumerOfRaiserModules() {
 		return (int) (getMaxRaiserHeight() / getRaiserModuleHeight());
 	}
+
+	public float getMaxVolume() {
+		return getFootprint() * getMaxRaiserHeight();
+	}
 }

@@ -10,7 +10,7 @@ public class Pallet {
 	private PalletType palletType;
 	
 	private final String id;
-	private final List<Package> packages;
+	private List<Package> packages;
 	
 	public Pallet(String id, PalletType palletType) {
 		this.id = id;
@@ -18,9 +18,34 @@ public class Pallet {
 		this.palletType = palletType;
 	}
 
+	public boolean canContainPackage(Package package0) {
+		List<Package> newPackages = new ArrayList<>(packages);
+		newPackages.add(package0);
+		return new Pallet(newPackages).isValid();
+	}
+	
 	public void addPackage(Package package0) {
 		packages.add(package0);
 		palletType = getPalletTypeWithLargestVolume();
+	}
+	
+	public boolean addIfCanContain(Package package0) {
+		List<Package> newPackages = new ArrayList<>(packages);
+		newPackages.add(package0);
+		Pallet pallet = new Pallet(newPackages);
+		if (pallet.isValid()) {
+			packages = pallet.packages;
+			palletType = pallet.palletType;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public Package removePackageAt(int packageIndex) {
+		Package removedPackage = packages.remove(packageIndex);
+		palletType = getPalletTypeWithLargestVolume();
+		return removedPackage;
 	}
 	
 	private PalletType getPalletTypeWithLargestVolume() {
@@ -48,18 +73,18 @@ public class Pallet {
 		return palletType.getFootprint();
 	}
 	
-	public boolean canContainPackage(Package package0) {
-		List<Package> newPackages = new ArrayList<>(packages);
-		newPackages.add(package0);
-		return new Pallet(newPackages).isValid();
-	}
-	
 	private Pallet(List<Package> packages) {
 		this.id = "";
 		this.packages = packages;
 		this.palletType = getPalletTypeWithLargestVolume();
 	}
 	
+	public Pallet(Pallet pallet) {
+		this.id = pallet.id;
+		this.packages = new ArrayList<>(pallet.packages);
+		this.palletType = pallet.palletType;
+	}
+
 	private boolean isValid() {
 		return getNumberOfRaiserModules() <= palletType.getMaxNumerOfRaiserModules() 
 			&& getWeightOfContainedPackages() <= palletType.getMaxPackagesWeight(); 		
@@ -89,9 +114,21 @@ public class Pallet {
 	public float getVolume() {
 		return getFootprint() * getNumberOfRaiserModules() * palletType.getRaiserModuleHeight();
 	}
+	
+	public float getRemainingVolume() {
+		return palletType.getMaxVolume() - getVolume();
+	}
 
 	public List<Package> getPackages() {
 		return packages;
+	}
+	
+	public int getNumberOfPackages() {
+		return packages.size();
+	}
+	
+	public boolean isEmpty() {
+		return packages.size() == 0;
 	}
 	
 	@Override
